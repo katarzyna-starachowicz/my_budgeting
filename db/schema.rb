@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_03_212554) do
+
+ActiveRecord::Schema.define(version: 2021_01_29_133820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -19,12 +20,6 @@ ActiveRecord::Schema.define(version: 2021_02_03_212554) do
   create_table "budgets", force: :cascade do |t|
     t.uuid "uid", null: false
     t.string "name", limit: 140, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "currencies", force: :cascade do |t|
-    t.string "code", limit: 3, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
