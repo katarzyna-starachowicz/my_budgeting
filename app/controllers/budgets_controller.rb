@@ -21,5 +21,11 @@ class BudgetsController < ApplicationController
   def show
     @budget = ::Budgets::Budget.find(params[:id])
     @currency_code = ::Currency.find(@budget.currency_id).code
+    @categories_groups = ::Budgets::CategoriesGroup.where(budget_id: @budget.uid).map do |categories_group|
+      {
+        name: categories_group.name,
+        categories: ::Budgets::Category.where(category_id: categories_group.uid).to_a
+      }
+    end
   end
 end

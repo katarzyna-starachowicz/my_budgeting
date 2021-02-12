@@ -3,4 +3,14 @@
 Currency: <%= @currency_code %>
 </p>
 
+<h2>Categories:</h2>
+<% @categories_groups.each do |categories_group| %>
+  <h3><%= categories_group[:name] %></h3>
+    <ul>
+      <% categories_group[:categories].each do |category| %>
+        <li><%= category.name %></li>
+      <% end %>
+    </ul>
+<% end %>
+
 <br><%= link_to 'Back', root_path %>
