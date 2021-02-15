@@ -4,7 +4,10 @@ class Configuration
 
     command_bus.register(
       ::Budgeting::AddBudget,
-      ::Budgeting::OnAddBudget.new(schema_generator: Rails.configuration.schema_generator.call)
+      ::Budgeting::OnAddBudget.new(
+        schema_generator: Rails.configuration.schema_generator.call,
+        first_month_data_generator: Rails.configuration.first_month_data_generator.call
+      )
     )
   end
 end

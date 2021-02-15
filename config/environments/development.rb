@@ -61,4 +61,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.schema_generator = ->{ ::Budgeting::SchemaGenerator.new }
+  config.first_month_data_generator = ->{ ::Budgeting::FirstMonthDataGenerator.new }
 end

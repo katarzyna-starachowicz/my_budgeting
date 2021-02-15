@@ -48,4 +48,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.schema_generator = ->{ ::Budgeting::SchemaGenerator.new }
+  config.first_month_data_generator = ->{ ::Budgeting::FirstMonthDataGenerator.new }
 end

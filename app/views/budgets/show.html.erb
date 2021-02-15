@@ -1,16 +1,25 @@
-<h1>Budget: <%= @budget.name %></h1>
-<p>
-Currency: <%= @currency_code %>
-</p>
+<h1><%= "#{@budget.name} [#{@budget_month.month}]" %></h1>
 
-<h2>Categories:</h2>
-<% @categories_groups.each do |categories_group| %>
-  <h3><%= categories_group[:name] %></h3>
-    <ul>
-      <% categories_group[:categories].each do |category| %>
-        <li><%= category.name %></li>
-      <% end %>
-    </ul>
-<% end %>
+<table>
+  <tr>
+    <th>CATEGORY</th>
+    <th>BUDGETED</th>
+  </tr>
+  
+  <% @categories_groups.each do |categories_group| %>
+    <tr style="background-color: #f1f1c1">
+      <td><%= categories_group[:name] %></td>
+      <td><%= "#{categories_group[:budgeted]} #{@currency_code}"%></td>
+    </tr>
+
+    <% categories_group[:categories].each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td> <%= "#{category.budgeted} #{@currency_code}" %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
 
 <br><%= link_to 'Back', root_path %>
