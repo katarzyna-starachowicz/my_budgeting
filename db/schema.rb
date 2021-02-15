@@ -10,17 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_03_212554) do
+ActiveRecord::Schema.define(version: 2021_02_15_185425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+  create_table "budget_categories", force: :cascade do |t|
+    t.uuid "uid", null: false
+    t.string "name", limit: 140, null: false
+    t.uuid "category_id", null: false
+    t.decimal "budgeted", precision: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_budget_categories_on_category_id"
+  end
+
+  create_table "budget_categories_groups", force: :cascade do |t|
+    t.uuid "uid", null: false
+    t.string "name", limit: 140, null: false
+    t.uuid "budget_month_id", null: false
+    t.decimal "budgeted", precision: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["budget_month_id"], name: "index_budget_categories_groups_on_budget_month_id"
+  end
+
+  create_table "budget_months", force: :cascade do |t|
+    t.uuid "uid", null: false
+    t.date "month", null: false
+    t.uuid "budget_id", null: false
+    t.decimal "budgeted", precision: 2
+    t.index ["budget_id"], name: "index_budget_months_on_budget_id"
+  end
+
   create_table "budgets", force: :cascade do |t|
     t.uuid "uid", null: false
     t.string "name", limit: 140, null: false
+    t.integer "currency_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["currency_id"], name: "index_budgets_on_currency_id"
   end
 
   create_table "currencies", force: :cascade do |t|

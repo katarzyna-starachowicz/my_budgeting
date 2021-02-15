@@ -1,0 +1,20 @@
+<h1>New Budget</h1>
+
+<%= form_with url: "/budgets", method: :post, local: true do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div><br/>
+
+  <div>
+    <%= form.label :currency %><br>
+    <%= form.collection_select :currency_id, @currencies, :id, :code %>
+  </div><br/>
+
+  <div>
+    <%= form.hidden_field :budget_id, value: @budget_id %>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<br><%= link_to 'Back', root_path %>
