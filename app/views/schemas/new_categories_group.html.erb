@@ -1,0 +1,17 @@
+<h1>New Categories Group</h1>
+
+<%= form_with url: schema_create_categories_group_path, method: :post, local: true do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div><br/>
+
+  <div>
+    <%= form.hidden_field :schema_id, value: @schema_id %>
+    <%= form.hidden_field :categories_group_id, value: @categories_group_id %>
+    <%= form.hidden_field :budgeted, value: false %>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<br><%= link_to 'Back to categories', schemas_path %>
