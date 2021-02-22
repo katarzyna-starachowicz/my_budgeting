@@ -262,6 +262,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   dry-struct
+  dry-types
   jbuilder (~> 2.7)
   listen (~> 3.2)
   pg (~> 1.2.3)
