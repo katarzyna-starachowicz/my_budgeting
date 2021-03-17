@@ -29,6 +29,7 @@ class SchemasController < ApplicationController
 
   def new_category
     @category_id  = SecureRandom.uuid
+    @categories_group_id = params[:categories_group_id]
   end
 
   def create_category

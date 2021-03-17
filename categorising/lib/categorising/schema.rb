@@ -29,13 +29,11 @@ module Categorising
       raise MissingCategoriesGroup unless categories_group_id
 
       apply CategoryAdded.new(
-        data: {
-          schema_id: @schema_id,
-          category_id: category_id,
-          categories_group_id: categories_group_id,
-          name: name,
-          budgeted: budgeted
-        }
+        schema_id: @schema_id,
+        category_id: category_id,
+        categories_group_id: categories_group_id,
+        name: name,
+        budgeted: budgeted
       )
     end
 
@@ -51,21 +49,19 @@ module Categorising
 
     on CategoryAdded do |event|
       category = Category.new(
-        data: {
-          id: event.data[:category_id],
-          categories_group_id: event.data[:categories_group_id],
-          name: event.data[:name],
-          budgeted: event.data[:budgeted]
-        }
+        id: event.data[:category_id],
+        categories_group_id: event.data[:categories_group_id],
+        name: event.data[:name],
+        budgeted: event.data[:budgeted]
       )
 
-      category_group = find_category_group(event.data[:categories_group_id])
+      category_group = find_categories_group(event.data[:categories_group_id])
 
       category_group.add_category(category)
       category_group.set_budgeted(event.data[:budgeted])
     end
 
-    def find_category_group(id)
+    def find_categories_group(id)
       @categories_groups.find { |categories_group| categories_group.id == id }
     end
   end

@@ -11,7 +11,7 @@ module Categorising
     end
 
     def set_budgeted(category_budgeted)
-      budgeted = budgeded || category_budgeted
+      budgeted = budgeted || category_budgeted
     end
 
     private
