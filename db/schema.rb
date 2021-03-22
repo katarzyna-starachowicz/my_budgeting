@@ -10,11 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_174442) do
+ActiveRecord::Schema.define(version: 2021_03_17_203459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "budget_month_items", force: :cascade do |t|
+    t.uuid "uid", null: false
+    t.uuid "budget_month_id", null: false
+    t.uuid "budget_month_items_group_id", null: false
+    t.decimal "budgeted", precision: 2, default: "0"
+    t.decimal "spent", precision: 2, default: "0"
+    t.decimal "avaiable", precision: 2, default: "0"
+    t.string "name", limit: 140, null: false
+    t.uuid "schema_id", null: false
+    t.uuid "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["budget_month_id"], name: "index_budget_month_items_on_budget_month_id"
+    t.index ["budget_month_items_group_id"], name: "index_budget_month_items_on_budget_month_items_group_id"
+    t.index ["category_id"], name: "index_budget_month_items_on_category_id"
+    t.index ["schema_id"], name: "index_budget_month_items_on_schema_id"
+  end
+
+  create_table "budget_month_items_groups", force: :cascade do |t|
+    t.uuid "uid", null: false
+    t.uuid "budget_month_id", null: false
+    t.decimal "budgeted", precision: 2, default: "0"
+    t.decimal "spent", precision: 2, default: "0"
+    t.decimal "avaiable", precision: 2, default: "0"
+    t.string "name", limit: 140, null: false
+    t.uuid "schema_id", null: false
+    t.uuid "categories_group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["budget_month_id"], name: "index_budget_month_items_groups_on_budget_month_id"
+    t.index ["categories_group_id"], name: "index_budget_month_items_groups_on_categories_group_id"
+    t.index ["schema_id"], name: "index_budget_month_items_groups_on_schema_id"
+  end
+
+  create_table "budget_months", force: :cascade do |t|
+    t.uuid "uid", null: false
+    t.uuid "schema_id", null: false
+    t.integer "month", null: false
+    t.integer "year"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.uuid "uid", null: false

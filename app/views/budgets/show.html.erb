@@ -1,0 +1,34 @@
+<h1>My Budgeting</h1>
+<h2><%= "#{Date::MONTHNAMES[@budget_month.month]} #{@budget_month.year}"%></h2>
+
+
+<table>
+  <tr>
+    <th>CATEGORIES GROUP</th>
+    <th>CATEGORY</th>
+    <th>BUDGETED</th>
+    <th>SPENT</th>
+    <th>AVAIABLE</th>
+  </tr>
+
+  <% @budget_month_items_groups.each do |items_group| %>
+    <tr style="background-color: #f1f1c1">
+      <td><%= items_group[:name] %></td>
+      <td></td>
+      <td><%= items_group[:budgeted] %></td>
+      <td><%= items_group[:spent] %></td>
+      <td><%= items_group[:avaiable] %></td>
+
+    </tr>
+
+    <% items_group[:items].each do |item| %>
+      <tr>
+        <td></td>
+        <td><%= item.name %></td>
+        <td><%= item.budgeted %></td>
+        <td><%= item.spent %></td>
+        <td><%= item.avaiable %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

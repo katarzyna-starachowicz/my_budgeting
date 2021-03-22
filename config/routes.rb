@@ -6,4 +6,6 @@ Rails.application.routes.draw do
     get :new_categories_group, :new_category
     post :create_categories_group, :create_category
   end
+
+  root to: "budgets#show"
 end

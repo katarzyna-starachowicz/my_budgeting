@@ -37,6 +37,37 @@ schema = [
 ]
 
 ::Schema::Schema.create!(uid: schema_id)
+::Budget::BudgetMonth.create!(
+  schema_id: schema_id,
+  month: Time.now.month,
+  year: Time.now.year,
+  uid: SecureRandom.uuid
+)
+
+schema_id =  ::Schema::Schema.last.uid
+budget_month_id = ::Budget::BudgetMonth.last.uid
+::Schema::CategoriesGroup.all.map do |cg|
+  bmig_id = SecureRandom.uuid
+  ::Budget::BudgetMonthItemsGroup.create!(
+    uid: bmig_id,
+    budget_month_id: budget_month_id,
+    schema_id: schema_id,
+    name: cg.name,
+    categories_group_id: cg.uid
+  )
+
+  ::Schema::Category.where(categories_group_id: cg.uid).to_a.each do |c|
+    ::Budget::BudgetMonthItem.create!(
+      uid: SecureRandom.uuid,
+      budget_month_id: budget_month_id,
+      budget_month_items_group_id: bmig_id,
+      schema_id: schema_id,
+      name: c.name,
+      category_id: c.uid
+    )
+  end
+end
+
 
 # schema.each do |categories_group|
 #   ::Schema::CategoriesGroup.create!(

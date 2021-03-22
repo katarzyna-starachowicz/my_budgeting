@@ -1,6 +1,7 @@
 class SchemasController < ApplicationController
   def index
     @schema_id = ::Schema::Schema.first.uid
+    @budget_month = Budget::BudgetMonth.find_by(schema_id: @schema_id)
     @categories_groups = ::Schema::CategoriesGroup.all.map do |categories_group|
       {
         name: categories_group.name,
