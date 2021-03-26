@@ -55,3 +55,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'rails_event_store', '~> 2.1.0', require: %w[aggregate_root rails_event_store]
 gem 'dry-struct'
+gem 'dry-types'

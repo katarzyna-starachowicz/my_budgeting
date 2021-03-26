@@ -1,0 +1,27 @@
+<h1>Categories</h1>
+
+<td><%= link_to 'Add new categories group', schema_new_categories_group_path(schema_id: @schema_id) %></td>
+
+
+<table>
+  <tr>
+    <th>CATEGORIES GROUP</th>
+    <th>CATEGORY</th>
+  </tr>
+
+  <% @categories_groups.each do |categories_group| %>
+    <tr style="background-color: #f1f1c1">
+      <td><%= categories_group[:name] %></td>
+      <td><%= link_to 'Add new category', schema_new_category_path(schema_id: @schema_id, categories_group_id: categories_group[:id]) %></td>
+    </tr>
+
+    <% categories_group[:categories].each do |category| %>
+      <tr>
+        <td></td>
+        <td><%= category.name %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<td><%= link_to 'Go to the budget', root_path %></td>
